@@ -1,0 +1,20 @@
+/* *{
+    margin: 0;
+    padding: 0;
+} */
+
+
+
+.navContainer{
+    padding: 4px;
+    background-color: black;
+    color: white;
+}
+
+.navContainer ul{
+   
+    list-style-type: None;  
+    display: flex; 
+    justify-content: center;
+    gap: 80px;  
+}

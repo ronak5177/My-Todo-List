@@ -1,0 +1,28 @@
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .card{
+    height: 300px;
+    width: 300px;
+    border: 2px solid black;
+    border-radius: 4px;
+    margin: 14px;
+    padding: 13px;
+  }
+  
+  .card .listname li{
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .card h2{
+    text-align: center;
+  }
+  
+  .container > .card > .addData{
+      display: flex;
+      justify-content: center;
+  }
