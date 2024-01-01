@@ -4,7 +4,9 @@
     align-items: center;
   }
   
-  .card{
+  .container .card{
+    /* background-color:#f8f8f8;  */
+    /* z-index: 20; */
     height: 300px;
     width: 300px;
     border: 2px solid black;

@@ -58,8 +58,8 @@ let [flag, setFlag] = useState(true);
     axios
       .post(`http://localhost:8000/user`, {
         task: comment,
-        user: "Ronak",
-        email: "ronak.dev@gmail.com",
+        user: "Mayank",
+        email: "mayank.dev@gmail.com",
         state: "running",
       })
       .then((res) => {

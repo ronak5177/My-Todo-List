@@ -1,12 +1,23 @@
+import { Routes, Route, Router } from "react-router-dom";
 import "./App.css";
-import Card from './components/Card';
-import Navbar from "./components/Navbar";
+import Card from "./components/Card/Card";
+import Navbar from "./components/Navbar/Navbar";
+import SignIn from "./components/Login/SignIn";
+import SignUp from "./components/Login/SignUp";
+import Home from "./components/Home";
+import Peers from "./components/Peers/Peers";
 
-function App() { 
-   return (
+function App() {
+  return (
     <>
       <Navbar />
-      <Card />
+      <Routes>
+        <Route path="/" element={<Card />} />
+        <Route path="/navbar" element={<Navbar />} />
+        <Route path="/signin" element={<SignIn />} />
+        <Route path="/signup" element={<SignUp />} />
+        <Route path="/peers" element={<Peers />} />
+      </Routes>
     </>
   );
 }

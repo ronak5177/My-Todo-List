@@ -1,0 +1,36 @@
+
+
+.signInBox{
+    display: flex;
+    background-color: #e2e2e2;;
+    align-items: center;
+    flex-direction: column;
+    width: 380px;
+    height: 280px;
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 8px;
+    margin-top: 100px;
+    gap: 18px;
+}
+
+.signInBox input{
+    border: none;
+    padding: 10px 30px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.signInBox button{
+    background-color: rgb(81 94 26);
+    color: white;
+    padding: 8px 97px;
+    border-radius: 8px;
+    border: none;
+    font-size: 16px;
+    box-shadow: 3px 3px 10px rgba(0,0,0,.8)
+}
+
+.signInBox span{
+    color: rgb(107, 105, 105);
+}

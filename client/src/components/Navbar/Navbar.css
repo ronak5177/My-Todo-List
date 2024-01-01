@@ -18,3 +18,8 @@
     justify-content: center;
     gap: 80px;  
 }
+
+.navContainer ul a{
+    text-decoration: none;
+    color: white;
+}

@@ -1,0 +1,42 @@
+/* .signUpContainer{
+  
+} */
+
+.signUpBox{
+    display: flex;
+    background-color: #e2e2e2;
+    /* bisque; */
+    align-items: center;
+    flex-direction: column;
+    width: 380px;
+    height: 350px;
+    margin: auto;
+    border: 1px solid black;
+    border-radius: 8px;
+    margin-top: 100px;
+    gap: 18px;
+}
+
+.signUpBox input{
+    border: none;
+    padding: 10px 30px;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
+.signUpBox button{
+    background-color: rgb(81 94 26);
+    /* rgb(255, 94, 120); */
+    color: white;
+    padding: 8px 32px;
+    border-radius: 21px;
+    border: none;
+    font-size: 14px;
+    box-shadow: 3px 3px 10px rgba(0,0,0,.8);
+    margin: 11px 10px ;
+    cursor: pointer;
+}
+
+.signUpBox span{
+    color: rgb(107, 105, 105);
+}

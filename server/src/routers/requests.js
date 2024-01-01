@@ -4,11 +4,11 @@ const TaskList = require("../models/tasks")
 
 //setting up the request router
 const router = express.Router();
-const user = "Ronak";
+const user = "Mayank";
 
 router.get("/user", async (req, res) => {
-  const allDbTasks = await TaskList.find({user})
   try {
+    const allDbTasks = await TaskList.find({user})
     const groupedTasks = allDbTasks.reduce((acc, { _id, state, task: taskName }) => {
       acc[state] = [...(acc[state] || []), {_id,taskName}];
       return acc;
@@ -18,6 +18,19 @@ router.get("/user", async (req, res) => {
     return res.status(404).send({message: "some issue in get request"});
   }
 });
+
+router.get("/otheruser", async (req, res)=>{
+  try {
+    const otherUserTasks = await TaskList.find({user : {$ne : user}})
+    const groupedTasks = otherUserTasks.reduce((acc,{ user, _id, state, task: taskName } ) => {
+      acc[state] = [...(acc[state] || []), {user, _id,taskName}];
+      return acc;
+    }, {});
+    return res.status(200).send(groupedTasks);
+  } catch (error) {
+     return res.status(404).send({message: "some issue in get request"});
+  }
+})
 
 router.post("/user", async (req, res) => {
   try {
