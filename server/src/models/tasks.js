@@ -20,6 +20,26 @@ const taskListSchema = new mongoose.Schema({
     }
 })
 
-const TaskList = mongoose.model("mylist", taskListSchema)
+const users = new mongoose.Schema({
+    name:{
+        type: String,
+        required: true,
+    },
+    email: {
+        type: String,
+        required: true,
+        unique: true
+    },
+    password:{
+        type: String,
+        required: true
+    }
 
-module.exports = TaskList;
+})
+
+
+const TaskList = mongoose.model("mylist", taskListSchema)
+const UserList = mongoose.model("userlist", users)
+module.exports = {
+    TaskList, UserList
+}

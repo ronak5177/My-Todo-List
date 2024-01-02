@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BiListCheck, BiUndo } from "react-icons/bi";
 import { RiDeleteBin3Fill } from "react-icons/ri";
 import axios from "axios";
+import "./Card.css"
 
 const Card = () => {
   
@@ -45,7 +46,7 @@ let [flag, setFlag] = useState(true);
   };
   const handleMove = async (id) => {
     await axios
-      .patch(`http://localhost:8000/${id}`)
+      .patch(`http://localhost:8000/user${id}`)
       .then((res) => {
         // alert(`Data moved successfully for task ${id}`)
         setFlag((flag) => !flag);

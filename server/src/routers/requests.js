@@ -1,10 +1,11 @@
 const express = require("express");
 
-const TaskList = require("../models/tasks")
+const { UserList, TaskList } = require("../models/tasks")
 
 //setting up the request router
 const router = express.Router();
-const user = "Mayank";
+// const user = "Ronak";
+let user;
 
 router.get("/user", async (req, res) => {
   try {
@@ -21,12 +22,33 @@ router.get("/user", async (req, res) => {
 
 router.get("/otheruser", async (req, res)=>{
   try {
-    const otherUserTasks = await TaskList.find({user : {$ne : user}})
-    const groupedTasks = otherUserTasks.reduce((acc,{ user, _id, state, task: taskName } ) => {
-      acc[state] = [...(acc[state] || []), {user, _id,taskName}];
-      return acc;
-    }, {});
-    return res.status(200).send(groupedTasks);
+    // Fetch all tasks from MongoDB
+    const data = await TaskList.find({user : {$ne : user}})
+    // let users = []    
+    // data.forEach(user => {
+    //   if (!users.includes(user.user)) {
+    //     users.push(user.user);
+    //   }
+    // })
+
+    const formattedData = {};
+
+data.forEach((task) => {
+  if (!formattedData[task.user]) {
+    formattedData[task.user] = {
+      running: [],
+      in_progress: [],
+      done: [],
+    };
+  }
+
+  formattedData[task.user][task.state].push({
+    _id: task._id,
+    taskName: task.task,
+  });
+});
+
+    return res.status(200).send(formattedData);
   } catch (error) {
      return res.status(404).send({message: "some issue in get request"});
   }
@@ -58,7 +80,7 @@ router.delete("/user/:id", async (req, res) => {
 });
 
 // For Move
-router.patch("/:id", async (req, res) => {
+router.patch("/user/:id", async (req, res) => {
     try {
         const userTask = await TaskList.findById(req.params.id)  
         if (userTask.state == "in_progress"){
@@ -90,5 +112,30 @@ router.patch("/user/:id", async (req, res) => {
     return res.status(400).send({ error: error.message });
 }
 });
+
+// SignUp
+router.post("/user/signup", async (req, res)=>{
+  try {
+      await UserList.create(req.body);
+      res.status(200).send(`User: ${req.body.email} Created`)
+  } catch (error) {
+    res.status(400).send({error: error.message})
+  }
+})
+
+router.post("/user/signin", async (req, res)=>{
+  try {
+      const data = await UserList.findOne({email: req.body.email})
+      if (data && (data.password === req.body.password)){
+        user = data.name
+        return res.status(200).send(`Successfully logiin with user ${data.email}`)
+      }
+      console.log("Error data")
+      return res.status(401).send(`Please enter correct email id or password`)
+  } catch (error) {
+    console.log(error)
+    return res.status(400).send({error: error.message})
+  }
+})
 
 module.exports = router;
